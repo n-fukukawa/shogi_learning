@@ -1,30 +1,30 @@
-import {useEffect, FormEventHandler} from 'react';
-import GuestLayout from '@/Layouts/GuestLayout';
-import InputError from '@/Components/InputError';
-import InputLabel from '@/Components/InputLabel';
-import PrimaryButton from '@/Components/PrimaryButton';
-import TextInput from '@/Components/TextInput';
-import {Head, Link, useForm} from '@inertiajs/react';
+import { useEffect, FormEventHandler } from 'react'
+import GuestLayout from '@/Layouts/GuestLayout'
+import InputError from '@/Components/InputError'
+import InputLabel from '@/Components/InputLabel'
+import PrimaryButton from '@/Components/PrimaryButton'
+import TextInput from '@/Components/TextInput'
+import { Head, Link, useForm } from '@inertiajs/react'
 
 export default function Register() {
-  const {data, setData, post, processing, errors, reset} = useForm({
+  const { data, setData, post, processing, errors, reset } = useForm({
     name: '',
     email: '',
     password: '',
-    password_confirmation: '',
-  });
+    password_confirmation: ''
+  })
 
   useEffect(() => {
     return () => {
-      reset('password', 'password_confirmation');
-    };
-  }, []);
+      reset('password', 'password_confirmation')
+    }
+  }, [])
 
   const submit: FormEventHandler = (e) => {
-    e.preventDefault();
+    e.preventDefault()
 
-    post(route('register'));
-  };
+    post(route('register'))
+  }
 
   return (
     <GuestLayout>
@@ -32,7 +32,7 @@ export default function Register() {
 
       <form onSubmit={submit}>
         <div>
-          <InputLabel htmlFor="name" value="Name" />
+          <InputLabel htmlFor="name" value="ユーザー名" />
 
           <TextInput
             id="name"
@@ -49,7 +49,7 @@ export default function Register() {
         </div>
 
         <div className="mt-4">
-          <InputLabel htmlFor="email" value="Email" />
+          <InputLabel htmlFor="email" value="メールアドレス" />
 
           <TextInput
             id="email"
@@ -66,7 +66,7 @@ export default function Register() {
         </div>
 
         <div className="mt-4">
-          <InputLabel htmlFor="password" value="Password" />
+          <InputLabel htmlFor="password" value="パスワード" />
 
           <TextInput
             id="password"
@@ -83,7 +83,7 @@ export default function Register() {
         </div>
 
         <div className="mt-4">
-          <InputLabel htmlFor="password_confirmation" value="Confirm Password" />
+          <InputLabel htmlFor="password_confirmation" value="パスワード（確認）" />
 
           <TextInput
             id="password_confirmation"
@@ -99,19 +99,19 @@ export default function Register() {
           <InputError message={errors.password_confirmation} className="mt-2" />
         </div>
 
-        <div className="flex items-center justify-end mt-4">
+        <div className="flex items-center justify-between mt-6">
           <Link
             href={route('login')}
-            className="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            className="underline text-sm text-stone-600 hover:text-stone-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500"
           >
-            Already registered?
+            すでに登録済みですか?
           </Link>
 
-          <PrimaryButton className="ms-4" disabled={processing}>
-            Register
+          <PrimaryButton className="ms-4 w-24" disabled={processing}>
+            登録
           </PrimaryButton>
         </div>
       </form>
     </GuestLayout>
-  );
+  )
 }
