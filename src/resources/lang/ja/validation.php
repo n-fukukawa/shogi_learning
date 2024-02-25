@@ -155,7 +155,12 @@ return [
 
     'attributes' => [
         'email' => 'メールアドレス',
-        'password' => 'パスワード'
+        'password' => 'パスワード',
+
+        'learning_at' => '学習日',
+        'category_id' => '内容',
+        'learning_time' => '学習時間',
+        'title' => 'メモ',
     ],
 
 ];

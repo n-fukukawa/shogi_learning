@@ -60,6 +60,19 @@ services:
       - MYSQL_PASSWORD=${DB_PASSWORD:-secret}
       - MYSQL_ROOT_PASSWORD=${DB_PASSWORD:-secret}
 
+  test-db:
+    build:
+      context: .
+      dockerfile: ./infra/docker/mysql/Dockerfile
+    configs:
+      - source: db-config
+        target: /etc/my.cnf
+    environment:
+      - MYSQL_DATABASE=${DB_DATABASE:-laravel}
+      - MYSQL_USER=${DB_USERNAME:-phper}
+      - MYSQL_PASSWORD=${DB_PASSWORD:-secret}
+      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD:-secret}
+
   mailpit:
     image: axllent/mailpit
     ports:
