@@ -9,6 +9,7 @@
         "@headlessui/react": "^1.4.2",
         "@inertiajs/react": "^1.0.0",
         "@tailwindcss/forms": "^0.5.3",
+        "@types/chroma-js": "^2.4.4",
         "@types/node": "^18.13.0",
         "@types/react": "^18.0.28",
         "@types/react-dom": "^18.0.10",
@@ -35,6 +36,9 @@
         "@emotion/styled": "^11.11.0",
         "@mui/material": "^5.15.10",
         "@mui/x-date-pickers": "^6.19.5",
-        "date-fns": "^3.3.1"
+        "chart.js": "^4.4.1",
+        "chroma-js": "^2.4.2",
+        "date-fns": "^3.3.1",
+        "react-chartjs-2": "^5.2.0"
     }
 }

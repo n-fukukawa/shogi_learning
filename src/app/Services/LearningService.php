@@ -22,7 +22,14 @@ class LearningService
 
   public function getLearningStatics($learnings)
   {
+    $categories = $learnings->groupBy('category_id');
 
+    return $categories->map(function ($learnings) {
+      return [
+        "category" => $learnings->first()->category,
+        "learning_time" => $learnings->sum("learning_time"),
+      ];
+    })->values();
   }
 
 

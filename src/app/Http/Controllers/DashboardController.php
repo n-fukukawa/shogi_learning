@@ -6,7 +6,6 @@ use App\Http\Requests\DashboardRequest;
 use App\Services\LearningCategoryService;
 use App\Services\LearningService;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class DashboardController extends Controller
@@ -28,8 +27,12 @@ class DashboardController extends Controller
         $month = $request->month ?? $today->month;
 
         $learnings = $this->learningService->findMyMonthlyLearnings($year, $month);
+        $statistics = $this->learningService->getLearningStatics($learnings);
         $categories = $this->categoryService->findAll();
 
-        return Inertia::render('Dashboard/Dashboard', compact("year", "month", "learnings", "categories"));
+        return Inertia::render(
+            'Dashboard/Dashboard', 
+            compact("year", "month", "learnings", "statistics", "categories")
+        );
     }
 }

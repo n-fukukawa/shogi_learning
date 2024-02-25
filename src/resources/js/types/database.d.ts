@@ -13,3 +13,8 @@ type Learning = {
   title?: string
   comment?: string
 }
+
+type Statistics = {
+  category: Category
+  learning_time: number
+}
