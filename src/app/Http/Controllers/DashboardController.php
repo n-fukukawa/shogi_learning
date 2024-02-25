@@ -2,21 +2,34 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\DashboardRequest;
 use App\Services\LearningCategoryService;
+use App\Services\LearningService;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class DashboardController extends Controller
 {
-    public function __construct(LearningCategoryService $categoryService)
+    public function __construct(
+        LearningService $learningService,
+        LearningCategoryService $categoryService,
+    )
     {
+        $this->learningService = $learningService;
         $this->categoryService = $categoryService;
     }
 
     
-    public function index(Request $request)
+    public function index(DashboardRequest $request)
     {
+        $today = Carbon::today();
+        $year = $request->year ?? $today->year;
+        $month = $request->month ?? $today->month;
+
+        $learnings = $this->learningService->findMyMonthlyLearnings($year, $month);
         $categories = $this->categoryService->findAll();
-        return Inertia::render('Dashboard/Dashboard', ["categories" => $categories]);
+
+        return Inertia::render('Dashboard/Dashboard', compact("year", "month", "learnings", "categories"));
     }
 }

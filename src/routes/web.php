@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\LearningCreateController;
+use App\Http\Controllers\LearningController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -31,7 +31,7 @@ Route::get('/dashboard', [DashboardController::class, 'index'])
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
 
-Route::post('/learning/store', [LearningCreateController::class, 'store'])
+Route::post('/learning/store', [LearningController::class, 'store'])
     ->middleware(['auth', 'verified'])
     ->name('store-learning');
 

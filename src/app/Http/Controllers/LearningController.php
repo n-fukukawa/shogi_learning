@@ -6,7 +6,7 @@ use App\Http\Requests\StoreLearningRequest;
 use App\Services\LearningService;
 use Illuminate\Support\Facades\Redirect;
 
-class LearningCreateController extends Controller
+class LearningController extends Controller
 {
     public function __construct(LearningService $learningService)
     {

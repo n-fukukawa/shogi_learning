@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Learning extends Model
 {
@@ -17,4 +18,9 @@ class Learning extends Model
         "learning_at",
         "learning_time",
     ];
+
+    public function category(): BelongsTo
+    {
+        return $this->belongsTo(LearningCategory::class, 'category_id');
+    }
 }
