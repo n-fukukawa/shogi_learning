@@ -34,13 +34,17 @@ export default function MyDatePicker(props: Props) {
           // onClose={}
           format="yyyy年 M月"
           slotProps={{
-            toolbar: { toolbarFormat: 'yyyy年 M月' }
+            toolbar: {
+              toolbarFormat: 'yyyy年 M月',
+              className: 'text-stone-600 text-md',
+              sx: { '& h4': { fontSize: 24 } }
+            }
           }}
           sx={{
             '& fieldSet': { border: 'none' },
-            '& input': { fontSize: '1.5rem', cursor: 'pointer' },
+            '& input': { fontSize: '1.3rem', color: '#57534f', cursor: 'pointer' },
             '& input:focus': { '--tw-ring-color': 'transparent' },
-            '& .MuiInputBase-root': { borderRadius: 0 }
+            '& .MuiInputBase-root': { borderRadius: 0, color: '#57534f' }
           }}
         />
       </LocalizationProvider>
