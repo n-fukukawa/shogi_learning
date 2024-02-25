@@ -23,8 +23,8 @@ class DashboardController extends Controller
     public function index(DashboardRequest $request)
     {
         $today = Carbon::today();
-        $year = $request->year ?? $today->year;
-        $month = $request->month ?? $today->month;
+        $year = $request->year ? intval($request->year) : $today->year;
+        $month = $request->month ? intval($request->month) : $today->month;
 
         $learnings = $this->learningService->findMyMonthlyLearnings($year, $month);
         $statistics = $this->learningService->getLearningStatics($learnings);

@@ -13,11 +13,18 @@ type Props = {
   auth: {
     user: User
   }
+  defaultYear: number
+  defaultMonth: number
   categories: Category[]
-  open: boolean
   onClose: () => void
 }
-export default function LearningCreate({ auth, categories, open, onClose }: Props) {
+export default function LearningCreate({
+  auth,
+  defaultYear,
+  defaultMonth,
+  categories,
+  onClose
+}: Props) {
   const { data, setData, post, processing, errors } = useForm({
     user_id: auth.user.id,
     learning_at: '',
@@ -29,9 +36,17 @@ export default function LearningCreate({ auth, categories, open, onClose }: Prop
   useEffect(() => {
     const today = new Date()
     const year = today.getFullYear()
-    const month = `0${today.getMonth() + 1}`.slice(-2)
+    const month = today.getMonth() + 1
     const date = today.getDate()
-    setData({ ...data, learning_at: `${year}-${month}-${date}` })
+
+    if (year === defaultYear && month === defaultMonth) {
+      setData({ ...data, learning_at: `${year}-${`0${month}`.slice(-2)}-${date}` })
+    } else {
+      setData({
+        ...data,
+        learning_at: `${defaultYear}-${`0${defaultMonth}`.slice(-2)}-01`
+      })
+    }
   }, [])
 
   const handleLearningTime = (minutes: number) => {
@@ -45,7 +60,7 @@ export default function LearningCreate({ auth, categories, open, onClose }: Prop
 
   return (
     <Dialog
-      open={open}
+      open={true}
       fullWidth
       maxWidth="xs"
       onClose={onClose}
@@ -83,7 +98,7 @@ export default function LearningCreate({ auth, categories, open, onClose }: Prop
         <InputError message={errors.category_id} className="mt-2" />
 
         <InputLabel value="学習時間" className="mt-6 mb-1" />
-        <div className="flex items-center">
+        <div className="flex items-center justify-start">
           <TextInput
             className="w-16"
             type="text"
