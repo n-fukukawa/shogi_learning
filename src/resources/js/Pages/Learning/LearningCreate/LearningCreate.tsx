@@ -8,25 +8,24 @@ import { User } from '@/types'
 import { useForm } from '@inertiajs/react'
 import { Dialog, DialogActions, DialogContent } from '@mui/material'
 import { useEffect } from 'react'
+import { getProperForegroundColor } from '@/utils/colorHelper'
 
 type Props = {
-  auth: {
-    user: User
-  }
+  user: User
   defaultYear: number
   defaultMonth: number
   categories: Category[]
   onClose: () => void
 }
 export default function LearningCreate({
-  auth,
+  user,
   defaultYear,
   defaultMonth,
   categories,
   onClose
 }: Props) {
   const { data, setData, post, processing, errors } = useForm({
-    user_id: auth.user.id,
+    user_id: user.id,
     learning_at: '',
     category_id: categories[0].id,
     learning_time: '',
@@ -40,14 +39,14 @@ export default function LearningCreate({
     const date = today.getDate()
 
     if (year === defaultYear && month === defaultMonth) {
-      setData({ ...data, learning_at: `${year}-${`0${month}`.slice(-2)}-${date}` })
+      setData({ ...data, learning_at: `${year}-${`0${month}`.slice(-2)}-${`0${date}`.slice(-2)}` })
     } else {
       setData({
         ...data,
         learning_at: `${defaultYear}-${`0${defaultMonth}`.slice(-2)}-01`
       })
     }
-  }, [])
+  }, [defaultYear, defaultMonth])
 
   const handleLearningTime = (minutes: number) => {
     const learning_time = Math.max(0, Number(data.learning_time) + minutes)
@@ -55,7 +54,7 @@ export default function LearningCreate({
   }
 
   const save = () => {
-    post(route('store-learning'))
+    post(route('store-learning'), { onSuccess: onClose })
   }
 
   return (
@@ -85,7 +84,11 @@ export default function LearningCreate({
               style={{
                 width: 'calc(33% - 0.2rem)',
                 borderColor: data.category_id === category.id ? category.color : undefined,
-                background: data.category_id === category.id ? category.color : undefined
+                background: data.category_id === category.id ? category.color : undefined,
+                color:
+                  data.category_id === category.id
+                    ? getProperForegroundColor(category.color)
+                    : undefined
               }}
               size="small"
               onClick={() => setData({ ...data, category_id: category.id })}

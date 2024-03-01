@@ -1,3 +1,5 @@
+const DAYS = ['日', '月', '火', '水', '木', '金', '土'] as const
+
 export const formatDate = (dateString: string) => {
   const date = new Date(dateString)
 
@@ -11,4 +13,10 @@ export const formatMonthAndDate = (dateString: string) => {
   const day = date.getDate()
 
   return month + '/' + day
+}
+
+export const getDateAndWeekday = (dateString: string) => {
+  const date = new Date(dateString)
+  const weekday = date.getDay()
+  return `${date.getDate()} ${DAYS[weekday]}`
 }

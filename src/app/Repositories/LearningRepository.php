@@ -13,7 +13,8 @@ class LearningRepository
     $to = $from->copy()->endOfMonth();
 
     $learnings = Learning::with(['category'])->where('user_id', $user_id)
-      ->whereBetween('learning_at', [$from, $to]);
+      ->whereBetween('learning_at', [$from, $to])
+      ->orderBy('learning_at', 'desc');
 
     return $learnings;
   }
