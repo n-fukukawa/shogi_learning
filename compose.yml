@@ -21,6 +21,8 @@ services:
         target: /root/.config/psysh
         volume:
           nocopy: true
+      - /workspace/node_modules
+      - /workspace/vendor
 
   web:
     build:
