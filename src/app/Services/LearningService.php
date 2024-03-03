@@ -7,7 +7,9 @@ use Illuminate\Support\Facades\Auth;
 
 class LearningService
 {
-  public function __construct(LearningRepository $repository)
+  public function __construct(
+    private LearningRepository $repository
+  )
   {
     $this->repository = $repository;
   }
@@ -16,6 +18,7 @@ class LearningService
   {
     return $this->repository->findUserMonthlyLearnings(Auth::id(), $year, $month)
       ->orderBy('learning_at', 'desc')
+      ->orderBy('created_at', 'desc')
       ->get();
   }
 
@@ -36,5 +39,11 @@ class LearningService
   public function save($params)
   {
     return $this->repository->save($params);
+  }
+
+
+  public function update($id, $params)
+  {
+    return $this->repository->update($id, $params);
   }
 }

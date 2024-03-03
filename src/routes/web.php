@@ -27,13 +27,17 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/dashboard', [DashboardController::class, 'index'])
-    ->middleware(['auth', 'verified'])
-    ->name('dashboard');
 
-Route::post('/learning/store', [LearningController::class, 'store'])
-    ->middleware(['auth', 'verified'])
-    ->name('store-learning');
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])
+        ->name('dashboard');
+
+    Route::post('/learning/store', [LearningController::class, 'store'])
+        ->name('store-learning');
+    
+    Route::put('/learning/{id}', [LearningController::class, 'edit'])
+    ->name('edit-learning');
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

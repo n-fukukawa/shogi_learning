@@ -2,12 +2,13 @@ import { getDateAndWeekday } from '@/utils/dateUtil'
 
 type Props = {
   learning: Learning
+  onClick: () => void
 }
 export default function LearningListItem(props: Props) {
-  const { learning } = props
+  const { learning, onClick } = props
 
   return (
-    <tr className="border-b-2 border-stone-200 text-stone-700">
+    <tr className="border-b-2 border-stone-200 text-stone-700" onClick={onClick}>
       <td className="text-sm text-right py-2 pr-2 whitespace-nowrap">
         {getDateAndWeekday(learning.learning_at)}
       </td>

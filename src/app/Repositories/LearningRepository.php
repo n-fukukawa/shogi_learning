@@ -26,4 +26,12 @@ class LearningRepository
 
     return $learning;
   }
+
+  public function update($id, $params)
+  {
+    $learning = Learning::find($id);
+    $learning->update($params);
+    
+    return $learning;
+  }
 }

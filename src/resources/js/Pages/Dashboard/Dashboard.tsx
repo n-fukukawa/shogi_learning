@@ -64,6 +64,7 @@ export default function Dashboard(props: Props) {
         learnings={learnings}
         year={year}
         month={month}
+        categories={categories}
         open={isLearningListOpen}
         onClose={() => setLearningListOpen(false)}
       />
