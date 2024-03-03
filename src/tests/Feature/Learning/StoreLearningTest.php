@@ -37,6 +37,6 @@ class StoreLearningTest extends TestCase
             'title' => 'fake-title',
         ]);
 
-        $response->assertRedirect('/dashboard');
+        $response->assertStatus(200);
     }
 }

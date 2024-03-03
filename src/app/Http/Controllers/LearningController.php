@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreLearningRequest;
 use App\Services\LearningService;
-use Illuminate\Support\Facades\Redirect;
 
 class LearningController extends Controller
 {
@@ -16,7 +15,5 @@ class LearningController extends Controller
     public function store(StoreLearningRequest $request)
     {
         $this->learningService->save($request->all());
-
-        return Redirect::route('dashboard');
     }
 }
