@@ -37,6 +37,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     
     Route::put('/learning/{id}', [LearningController::class, 'edit'])
     ->name('edit-learning');
+
+    Route::delete('/learning/{id}', [LearningController::class, 'delete'])
+    ->name('delete-learning');
 });
 
 Route::middleware('auth')->group(function () {

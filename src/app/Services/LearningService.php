@@ -46,4 +46,10 @@ class LearningService
   {
     return $this->repository->update($id, $params);
   }
+
+
+  public function delete($id)
+  {
+    return $this->repository->delete($id);
+  }
 }

@@ -6,7 +6,7 @@ import SecondaryButton from '@/Components/SecondaryButton'
 import TextInput from '@/Components/TextInput'
 import { User } from '@/types'
 import { useForm } from '@inertiajs/react'
-import { Dialog, DialogActions, DialogContent } from '@mui/material'
+import { Button, Dialog, DialogActions, DialogContent } from '@mui/material'
 import { useEffect } from 'react'
 import { getProperForegroundColor } from '@/utils/colorHelper'
 
@@ -24,6 +24,8 @@ export default function LearningEdit({ learning, categories, onClose }: Props) {
     title: learning.title
   })
 
+  const form = useForm({})
+
   const handleLearningTime = (minutes: number) => {
     const learning_time = Math.max(0, Number(data.learning_time) + minutes)
     setData({ ...data, learning_time: String(learning_time) })
@@ -31,6 +33,10 @@ export default function LearningEdit({ learning, categories, onClose }: Props) {
 
   const save = () => {
     put(`learning/${learning.id}`, { onSuccess: onClose })
+  }
+
+  const remove = () => {
+    form.delete(route('delete-learning', learning.id), { onSuccess: onClose })
   }
 
   return (
@@ -109,14 +115,23 @@ export default function LearningEdit({ learning, categories, onClose }: Props) {
 
         <InputError message={errors.user_id} className="mt-2" />
       </DialogContent>
-      <DialogActions>
+      <DialogActions style={{ display: 'block' }}>
         <div className="flex justify-between w-full px-4 py-2">
-          <SecondaryButton className="w-28" onClick={onClose} disabled={processing}>
+          <SecondaryButton className="w-1/2" onClick={onClose} disabled={processing}>
             閉じる
           </SecondaryButton>
-          <PrimaryButton className="w-28" onClick={save} disabled={processing}>
+          <PrimaryButton className="w-1/2 ml-4" onClick={save} disabled={processing}>
             保存
           </PrimaryButton>
+        </div>
+        <div>
+          <Button
+            disabled={form.processing}
+            onClick={remove}
+            style={{ width: '100%', color: '#ff5555' }}
+          >
+            削除する
+          </Button>
         </div>
       </DialogActions>
     </Dialog>

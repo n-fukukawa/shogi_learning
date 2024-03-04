@@ -8,7 +8,10 @@ export default function LearningListItem(props: Props) {
   const { learning, onClick } = props
 
   return (
-    <tr className="border-b-2 border-stone-200 text-stone-700" onClick={onClick}>
+    <tr
+      className="border-b-2 border-stone-200 text-stone-700 hover:bg-stone-100 cursor-pointer"
+      onClick={onClick}
+    >
       <td className="text-sm text-right py-2 pr-2 whitespace-nowrap">
         {getDateAndWeekday(learning.learning_at)}
       </td>

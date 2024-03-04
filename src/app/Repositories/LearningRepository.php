@@ -34,4 +34,10 @@ class LearningRepository
     
     return $learning;
   }
+
+  public function delete($id)
+  {
+    $learning = Learning::find($id);
+    $learning->delete();
+  }
 }
