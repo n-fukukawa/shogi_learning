@@ -6,6 +6,8 @@ import LearningPieChart from '../Learning/LearningChart/LearningPieChart'
 import MyYearMonthPicker from '@/Components/MyYearMonthPicker'
 import LearningCreateButton from '../Learning/LearningCreate/LearningCreateButton'
 import LearningListDialog from '../Learning/LearningList/LearningListDialog'
+import { ModeSwitcher } from './ModeSwitcher'
+import { DashboardMode } from './const/DashboardMode'
 
 type Props = PageProps & {
   year: number
@@ -20,6 +22,7 @@ export default function Dashboard(props: Props) {
 
   const { get } = useForm()
 
+  const [mode, switchMode] = useState(DashboardMode.PIE_CHART)
   const [isLearningListOpen, setLearningListOpen] = useState(false)
 
   const handleSubmit = (dateString: string | null) => {
@@ -40,6 +43,7 @@ export default function Dashboard(props: Props) {
             <MyYearMonthPicker defaultValue={`${year}-${month}-01`} onAccept={handleSubmit} />
             <LearningCreateButton categories={categories} year={year} month={month} />
           </div>
+          <ModeSwitcher className="my-2" mode={mode} switchMode={switchMode} />
           <div className="flex justify-center mt-6">
             {statistics.length > 0 && (
               <>
