@@ -156,6 +156,7 @@ return [
     'attributes' => [
         'email' => 'メールアドレス',
         'password' => 'パスワード',
+        'current_password' => '現在のパスワード',
 
         'learning_at' => '学習日',
         'category_id' => '内容',
