@@ -69,9 +69,9 @@ export default function Authenticated({
                       </Dropdown.Trigger>
 
                       <Dropdown.Content>
-                        <Dropdown.Link href={route('profile.edit')}>Profile</Dropdown.Link>
+                        <Dropdown.Link href={route('profile.edit')}>プロフィール</Dropdown.Link>
                         <Dropdown.Link href={route('logout')} method="post" as="button">
-                          Log Out
+                          ログアウト
                         </Dropdown.Link>
                       </Dropdown.Content>
                     </Dropdown>
@@ -107,20 +107,15 @@ export default function Authenticated({
             <div className={(showingNavigationDropdown ? 'block' : 'hidden') + ' sm:hidden'}>
               <div className="pt-2 pb-3 space-y-1">
                 <ResponsiveNavLink href={route('dashboard')} active={route().current('dashboard')}>
-                  Dashboard
+                  ホーム
                 </ResponsiveNavLink>
               </div>
 
               <div className="pt-4 pb-1 border-t border-gray-200">
-                <div className="px-4">
-                  <div className="font-medium text-base text-gray-800">{user.name}</div>
-                  <div className="font-medium text-sm text-gray-500">{user.email}</div>
-                </div>
-
-                <div className="mt-3 space-y-1">
-                  <ResponsiveNavLink href={route('profile.edit')}>Profile</ResponsiveNavLink>
+                <div className="space-y-1">
+                  <ResponsiveNavLink href={route('profile.edit')}>プロフィール</ResponsiveNavLink>
                   <ResponsiveNavLink method="post" href={route('logout')} as="button">
-                    Log Out
+                    ログアウト
                   </ResponsiveNavLink>
                 </div>
               </div>
