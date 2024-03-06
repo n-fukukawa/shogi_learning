@@ -15,7 +15,7 @@ const source = {
   [DashboardMode.LIST]: { title: '一覧', icon: <List /> }
 }
 
-export const ModeSwitcher: React.FC<Props> = (props) => {
+export const DashboardModeSwitcher: React.FC<Props> = (props) => {
   const { mode, switchMode, className } = props
 
   return (
@@ -26,10 +26,11 @@ export const ModeSwitcher: React.FC<Props> = (props) => {
         return (
           <Button
             startIcon={source[key].icon}
-            variant={isActive ? 'contained' : 'outlined'}
+            variant="outlined"
             color="secondary"
             onClick={() => switchMode(DashboardMode[key])}
-            className="w-36"
+            className="w-full"
+            style={{ boxShadow: 'none', border: !isActive ? 'none' : undefined }}
             key={key}
           >
             {source[key].title}

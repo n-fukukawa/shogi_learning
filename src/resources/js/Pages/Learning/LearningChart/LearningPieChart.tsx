@@ -107,9 +107,7 @@ const centerText = (text: string) => ({
     } else {
       ctx.font = `normal ${width / 12}px San-serif`
       ctx.fillStyle = '#777'
-      ctx.fillText(`${text}時間`, width / 2, top + height / 2 - height / 50)
-      ctx.font = `normal ${Math.max(width / 30, 13)}px San-serif`
-      ctx.fillText(`詳細を見る`, width / 2, top + height / 2 + height / 12)
+      ctx.fillText(`${text}時間`, width / 2, top + height / 2)
     }
   }
 })
