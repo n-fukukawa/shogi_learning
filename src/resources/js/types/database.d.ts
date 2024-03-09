@@ -2,6 +2,7 @@ type Category = {
   id: number
   name: string
   color: string
+  sort_order: number
 }
 
 type Learning = {
@@ -17,4 +18,8 @@ type Learning = {
 type Statistics = {
   category: Category
   learning_time: number
+}
+
+type StatisticsSet = {
+  [ym: string]: Statistics[]
 }

@@ -20,6 +20,20 @@ class LearningRepository
   }
 
 
+  public function findUserYearlyLearnings($user_id, $year, $month)
+  {
+    $current = Carbon::parse("$year-$month-01")->startOfMonth();
+    $from = $current->copy()->subYearWithoutOverflow();
+    $to = $current->copy()->endOfMonth();
+
+    $learnings = Learning::with(['category'])->where('user_id', $user_id)
+      ->whereBetween('learning_at', [$from, $to])
+      ->orderBy('learning_at', 'desc');
+
+    return $learnings;
+  }
+
+
   public function save($params)
   {
     $learning = Learning::create($params);

@@ -19,6 +19,11 @@ class Learning extends Model
         "learning_time",
     ];
 
+
+    protected $casts = [
+        'learning_at' => 'date'
+    ];
+
     public function category(): BelongsTo
     {
         return $this->belongsTo(LearningCategory::class, 'category_id');

@@ -28,11 +28,12 @@ class DashboardController extends Controller
 
         $learnings = $this->learningService->findMyMonthlyLearnings($year, $month);
         $statistics = $this->learningService->getLearningStatics($learnings);
+        $statisticsSet = $this->learningService->getMyRecentlyLearningStatistics($year, $month);
         $categories = $this->categoryService->findAll();
 
         return Inertia::render(
             'Dashboard/Dashboard', 
-            compact("year", "month", "learnings", "statistics", "categories")
+            compact("year", "month", "learnings", "statistics", "statisticsSet", "categories")
         );
     }
 }

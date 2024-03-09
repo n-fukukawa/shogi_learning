@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Repositories\LearningRepository;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 class LearningService
@@ -20,6 +21,36 @@ class LearningService
       ->orderBy('learning_at', 'desc')
       ->orderBy('created_at', 'desc')
       ->get();
+  }
+
+  /**
+   * 直近1年間の月ごとの学習統計を取得（2023/3～2024/3）
+   */
+  public function getMyRecentlyLearningStatistics($year, $month)
+  {
+    $learnings = $this->repository->findUserYearlyLearnings(Auth::id(), $year, $month)
+      ->orderBy('learning_at', 'desc')
+      ->orderBy('created_at', 'desc')
+      ->get();
+      
+    $learnings = $learnings->groupBy(function ($learning) {
+        return $learning->learning_at->format('Y/n');
+      })->map(function ($learnings) {
+        return $this->getLearningStatics($learnings);
+      });
+
+    $result = [];
+
+    $current = Carbon::parse("$year-$month-01")->startOfMonth();
+    $from = $current->copy()->subYearWithoutOverflow();
+    $to = $current->copy()->endOfMonth();
+
+    for ($d = $from->copy(); $d <= $to; $d->addMonthNoOverflow()) {
+      $ym = $d->format('Y/n');
+      $result[$ym] = $learnings[$ym] ?? [];
+    }
+
+    return $result;
   }
 
 
