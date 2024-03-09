@@ -46,21 +46,21 @@ export default function DeleteUserForm({ className = '' }: { className?: string 
   return (
     <section className={`space-y-6 ${className}`}>
       <header>
-        <h2 className="text-lg font-medium text-gray-900">アカウント削除</h2>
+        <h2 className="text-lg font-medium text-gray-900">退会</h2>
 
         <p className="mt-1 text-sm text-gray-600">
-          アカウント削除すると学習記録などのデータはもとに戻せません。
+          退会すると学習記録などのデータはもとに戻せません。
         </p>
       </header>
 
-      <DangerButton onClick={confirmUserDeletion}>アカウント削除</DangerButton>
+      <DangerButton onClick={confirmUserDeletion}>退会する</DangerButton>
 
       <Modal show={confirmingUserDeletion} onClose={closeModal}>
         <form onSubmit={deleteUser} className="p-6">
-          <h2 className="text-lg font-medium text-gray-900">本当に削除してよろしいでしょうか?</h2>
+          <h2 className="text-lg font-medium text-gray-900">本当に退会しますか?</h2>
 
           <p className="mt-1 text-sm text-gray-600">
-            アカウント削除すると学習記録などのデータはもとに戻せません。
+            退会すると学習記録などのデータはもとに戻せません。
           </p>
 
           <div className="mt-6">
@@ -85,7 +85,7 @@ export default function DeleteUserForm({ className = '' }: { className?: string 
             <SecondaryButton onClick={closeModal}>キャンセル</SecondaryButton>
 
             <DangerButton className="ms-3" disabled={processing}>
-              削除
+              退会する
             </DangerButton>
           </div>
         </form>

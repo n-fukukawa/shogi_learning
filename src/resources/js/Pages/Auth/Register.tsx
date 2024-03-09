@@ -5,6 +5,7 @@ import InputLabel from '@/Components/InputLabel'
 import PrimaryButton from '@/Components/PrimaryButton'
 import TextInput from '@/Components/TextInput'
 import { Head, Link, useForm } from '@inertiajs/react'
+import { LinearProgress } from '@mui/material'
 
 export default function Register() {
   const { data, setData, post, processing, errors, reset } = useForm({
@@ -30,7 +31,10 @@ export default function Register() {
     <GuestLayout>
       <Head title="Register" />
 
-      <form onSubmit={submit}>
+      {processing && (
+        <LinearProgress variant="indeterminate" className="mb-4" style={{ height: 6 }} />
+      )}
+      <form onSubmit={submit} className={processing ? 'opacity-50' : undefined}>
         <div>
           <InputLabel htmlFor="name" value="ユーザー名" />
 

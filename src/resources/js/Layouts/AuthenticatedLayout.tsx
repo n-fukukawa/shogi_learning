@@ -5,7 +5,16 @@ import ResponsiveNavLink from '@/Components/ResponsiveNavLink'
 import { Link } from '@inertiajs/react'
 import { Flash, User } from '@/types'
 import { UserContext } from '@/Context/UserContext'
-import { Alert, Slide, SlideProps, Snackbar, ThemeProvider, createTheme } from '@mui/material'
+import {
+  Alert,
+  Divider,
+  Slide,
+  SlideProps,
+  Snackbar,
+  ThemeProvider,
+  createTheme
+} from '@mui/material'
+import { theme } from './theme'
 
 export default function Authenticated({
   user,
@@ -20,16 +29,6 @@ export default function Authenticated({
     setShowFlashMessage(Boolean(flash.message))
   }, [flash])
 
-  const theme = createTheme({
-    palette: {
-      primary: {
-        main: '#f59e0b'
-      },
-      secondary: {
-        main: '#57534e'
-      }
-    }
-  })
   return (
     <ThemeProvider theme={theme}>
       <UserContext.Provider value={user}>
@@ -74,7 +73,9 @@ export default function Authenticated({
                       </Dropdown.Trigger>
 
                       <Dropdown.Content>
+                        <Dropdown.Link href={route('dashboard')}>ホーム</Dropdown.Link>
                         <Dropdown.Link href={route('profile.edit')}>プロフィール</Dropdown.Link>
+                        <Divider className="pt-1" />
                         <Dropdown.Link href={route('logout')} method="post" as="button">
                           ログアウト
                         </Dropdown.Link>
@@ -109,20 +110,24 @@ export default function Authenticated({
               </div>
             </div>
 
-            <div className={(showingNavigationDropdown ? 'block' : 'hidden') + ' sm:hidden'}>
-              <div className="pt-2 pb-3 space-y-1">
+            <div
+              className={
+                (showingNavigationDropdown ? 'block' : 'hidden') + ' sm:hidden shadow-md mb-4'
+              }
+            >
+              <div className="space-y-1">
                 <ResponsiveNavLink href={route('dashboard')} active={route().current('dashboard')}>
                   ホーム
                 </ResponsiveNavLink>
-              </div>
-
-              <div className="pt-4 pb-1 border-t border-gray-200">
-                <div className="space-y-1">
-                  <ResponsiveNavLink href={route('profile.edit')}>プロフィール</ResponsiveNavLink>
-                  <ResponsiveNavLink method="post" href={route('logout')} as="button">
-                    ログアウト
-                  </ResponsiveNavLink>
-                </div>
+                <ResponsiveNavLink
+                  href={route('profile.edit')}
+                  active={route().current('profile.edit')}
+                >
+                  プロフィール
+                </ResponsiveNavLink>
+                <ResponsiveNavLink method="post" href={route('logout')} as="button">
+                  ログアウト
+                </ResponsiveNavLink>
               </div>
             </div>
           </nav>

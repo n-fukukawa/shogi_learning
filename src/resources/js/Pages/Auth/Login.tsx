@@ -6,6 +6,7 @@ import InputLabel from '@/Components/InputLabel'
 import PrimaryButton from '@/Components/PrimaryButton'
 import TextInput from '@/Components/TextInput'
 import { Head, Link, useForm } from '@inertiajs/react'
+import { LinearProgress } from '@mui/material'
 
 export default function Login({
   status,
@@ -38,7 +39,11 @@ export default function Login({
 
       {status && <div className="mb-4 font-medium text-sm text-green-600">{status}</div>}
 
-      <form onSubmit={submit}>
+      {processing && (
+        <LinearProgress variant="indeterminate" className="mb-4" style={{ height: 6 }} />
+      )}
+
+      <form onSubmit={submit} className={processing ? 'opacity-50' : undefined}>
         <div>
           <InputLabel htmlFor="email" value="メールアドレス" />
 
