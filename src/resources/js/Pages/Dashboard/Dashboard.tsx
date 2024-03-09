@@ -13,14 +13,14 @@ import { DashboardBarChart } from './DashboardBarChart'
 type Props = PageProps & {
   year: number
   month: number
-  learnings: Learning[]
+  dailyLearnings: DailyLearning[]
   statistics: Statistics[]
   statisticsSet: StatisticsSet
   categories: Category[]
 }
 
 export default function Dashboard(props: Props) {
-  const { year, month, learnings, statistics, statisticsSet, categories } = props
+  const { year, month, dailyLearnings, statistics, statisticsSet, categories } = props
 
   const [mode, switchMode] = useState(DashboardMode.PIE_CHART)
 
@@ -52,8 +52,8 @@ export default function Dashboard(props: Props) {
             )}
             {mode === DashboardMode.LIST && (
               <DashboardLearningList
-                className="w-full px-4"
-                learnings={learnings}
+                className="w-full sm:px-4"
+                dailyLearnings={dailyLearnings}
                 categories={categories}
                 style={{ height: 'calc(100vh - 260px)', overflowY: 'auto' }}
               />

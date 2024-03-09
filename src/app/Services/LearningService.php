@@ -15,12 +15,29 @@ class LearningService
     $this->repository = $repository;
   }
 
+  
   public function findMyMonthlyLearnings($year, $month)
   {
     return $this->repository->findUserMonthlyLearnings(Auth::id(), $year, $month)
       ->orderBy('learning_at', 'desc')
       ->orderBy('created_at', 'desc')
       ->get();
+  }
+
+  
+  public function findMyDailyLearnings($year, $month)
+  {
+    $dates = $this->findMyMonthlyLearnings($year, $month)
+      ->groupBy(function ($learning) {
+        return $learning->learning_at->format('d');
+      });
+
+    return $dates->map(function ($learnings) {
+      return [
+        "learning_at" => $learnings->first()->learning_at,
+        "learnings" => $learnings,
+      ];
+    })->values();
   }
 
   /**

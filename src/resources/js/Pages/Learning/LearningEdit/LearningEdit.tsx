@@ -4,11 +4,10 @@ import InputLabel from '@/Components/InputLabel'
 import PrimaryButton from '@/Components/PrimaryButton'
 import SecondaryButton from '@/Components/SecondaryButton'
 import TextInput from '@/Components/TextInput'
-import { User } from '@/types'
 import { useForm } from '@inertiajs/react'
 import { Button, Dialog, DialogActions, DialogContent } from '@mui/material'
-import { useEffect } from 'react'
 import { getProperForegroundColor } from '@/utils/colorHelper'
+import { formatDate } from '@/utils/dateUtil'
 
 type Props = {
   learning: Learning
@@ -18,7 +17,7 @@ type Props = {
 export default function LearningEdit({ learning, categories, onClose }: Props) {
   const { data, setData, put, processing, errors } = useForm({
     user_id: learning.user_id,
-    learning_at: learning.learning_at,
+    learning_at: formatDate(learning.learning_at, '-', true),
     category_id: learning.category.id,
     learning_time: String(learning.learning_time),
     title: learning.title

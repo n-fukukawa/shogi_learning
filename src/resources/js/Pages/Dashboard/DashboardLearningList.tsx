@@ -3,21 +3,21 @@ import LearningEdit from '../Learning/LearningEdit/LearningEdit'
 import LearningList from '../Learning/LearningList/LearningList'
 
 type Props = {
-  learnings: Learning[]
+  dailyLearnings: DailyLearning[]
   categories: Category[]
   className?: string
   style?: CSSProperties
 }
 
 export const DashboardLearningList: React.FC<Props> = (props) => {
-  const { learnings, categories, className, style } = props
+  const { dailyLearnings, categories, className, style } = props
 
   const [activeLearning, setActiveLearning] = useState<Learning | null>(null)
 
   return (
     <>
       <LearningList
-        learnings={learnings}
+        dailyLearnings={dailyLearnings}
         onClickItem={setActiveLearning}
         className={className}
         style={style}

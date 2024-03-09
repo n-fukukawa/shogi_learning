@@ -26,14 +26,16 @@ class DashboardController extends Controller
         $year = $request->year ? intval($request->year) : $today->year;
         $month = $request->month ? intval($request->month) : $today->month;
 
-        $learnings = $this->learningService->findMyMonthlyLearnings($year, $month);
-        $statistics = $this->learningService->getLearningStatics($learnings);
+        $dailyLearnings = $this->learningService->findMyDailyLearnings($year, $month);
+        $statistics = $this->learningService->getLearningStatics(
+            $this->learningService->findMyMonthlyLearnings($year, $month)
+        );
         $statisticsSet = $this->learningService->getMyRecentlyLearningStatistics($year, $month);
         $categories = $this->categoryService->findAll();
 
         return Inertia::render(
             'Dashboard/Dashboard', 
-            compact("year", "month", "learnings", "statistics", "statisticsSet", "categories")
+            compact("year", "month", "dailyLearnings", "statistics", "statisticsSet", "categories")
         );
     }
 }

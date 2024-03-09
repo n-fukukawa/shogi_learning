@@ -2,26 +2,30 @@ import { CSSProperties } from 'react'
 import LearningListItem from './LearningListItem'
 
 type Props = {
-  learnings: Learning[]
+  dailyLearnings: DailyLearning[]
   onClickItem: (item: Learning) => void
   className?: string
   style?: CSSProperties
 }
 export default function LearningList(props: Props) {
-  const { learnings, onClickItem, className, style } = props
+  const { dailyLearnings, onClickItem, className, style } = props
+
+  if (dailyLearnings.length === 0) {
+    return <div className={'py-8 text-center' + className}>学習記録がありません</div>
+  }
+
   return (
     <div className={className} style={style}>
-      <table className="w-full">
-        <tbody>
-          {learnings.map((learning) => (
-            <LearningListItem
-              learning={learning}
-              onClick={() => onClickItem(learning)}
-              key={learning.id}
-            />
-          ))}
-        </tbody>
-      </table>
+      <div>
+        {dailyLearnings.map(({ learning_at, learnings }) => (
+          <LearningListItem
+            learning_at={learning_at}
+            learnings={learnings}
+            onClick={(learning: Learning) => onClickItem(learning)}
+            key={learning_at}
+          />
+        ))}
+      </div>
     </div>
   )
 }

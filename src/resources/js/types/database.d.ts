@@ -15,6 +15,11 @@ type Learning = {
   comment?: string
 }
 
+type DailyLearning = {
+  learning_at: string
+  learnings: Learning[]
+}
+
 type Statistics = {
   category: Category
   learning_time: number
