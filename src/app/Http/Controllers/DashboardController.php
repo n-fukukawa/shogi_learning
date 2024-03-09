@@ -11,8 +11,8 @@ use Inertia\Inertia;
 class DashboardController extends Controller
 {
     public function __construct(
-        LearningService $learningService,
-        LearningCategoryService $categoryService,
+        private LearningService $learningService,
+        private LearningCategoryService $categoryService,
     )
     {
         $this->learningService = $learningService;

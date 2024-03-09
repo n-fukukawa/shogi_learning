@@ -7,12 +7,14 @@ import { PageProps } from '@/types'
 
 export default function Edit({
   auth,
+  flash,
   mustVerifyEmail,
   status
 }: PageProps<{ mustVerifyEmail: boolean; status?: string }>) {
   return (
     <AuthenticatedLayout
       user={auth.user}
+      flash={flash}
       header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">プロフィール</h2>}
     >
       <Head title="プロフィール" />

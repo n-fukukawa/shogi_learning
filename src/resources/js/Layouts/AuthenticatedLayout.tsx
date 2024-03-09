@@ -1,19 +1,24 @@
-import { useState, PropsWithChildren, ReactNode } from 'react'
+import { useState, PropsWithChildren, ReactNode, useEffect } from 'react'
 import ApplicationLogo from '@/Components/ApplicationLogo'
 import Dropdown from '@/Components/Dropdown'
-import NavLink from '@/Components/NavLink'
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink'
 import { Link } from '@inertiajs/react'
-import { User } from '@/types'
+import { Flash, User } from '@/types'
 import { UserContext } from '@/Context/UserContext'
-import { ThemeProvider, createTheme } from '@mui/material'
+import { Alert, Slide, SlideProps, Snackbar, ThemeProvider, createTheme } from '@mui/material'
 
 export default function Authenticated({
   user,
+  flash,
   header,
   children
-}: PropsWithChildren<{ user: User; header?: ReactNode }>) {
+}: PropsWithChildren<{ user: User; flash: Flash; header?: ReactNode }>) {
   const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false)
+  const [showFlashMessage, setShowFlashMessage] = useState(false)
+
+  useEffect(() => {
+    setShowFlashMessage(Boolean(flash.message))
+  }, [flash])
 
   const theme = createTheme({
     palette: {
@@ -130,7 +135,26 @@ export default function Authenticated({
 
           <main>{children}</main>
         </div>
+        <Snackbar
+          open={showFlashMessage}
+          autoHideDuration={flash.message?.noAutoHide ? null : 3000}
+          TransitionComponent={TransitionComponent}
+          onClose={() => setShowFlashMessage(false)}
+        >
+          <Alert
+            className="sm:w-96 w-full"
+            severity={flash.message?.status}
+            variant="filled"
+            onClose={() => setShowFlashMessage(false)}
+          >
+            {flash.message?.text}
+          </Alert>
+        </Snackbar>
       </UserContext.Provider>
     </ThemeProvider>
   )
+}
+
+const TransitionComponent = (props: SlideProps) => {
+  return <Slide {...props} direction="up" />
 }

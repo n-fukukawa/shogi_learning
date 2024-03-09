@@ -18,7 +18,7 @@ type Props = PageProps & {
 }
 
 export default function Dashboard(props: Props) {
-  const { auth, year, month, learnings, statistics, categories } = props
+  const { year, month, learnings, statistics, categories } = props
 
   const [mode, switchMode] = useState(DashboardMode.PIE_CHART)
 
@@ -31,7 +31,7 @@ export default function Dashboard(props: Props) {
   }
 
   return (
-    <AuthenticatedLayout user={auth.user}>
+    <AuthenticatedLayout user={props.auth.user} flash={props.flash}>
       <Head title="ダッシュボード" />
 
       <div className="sm:py-4 py-2 px-4">
