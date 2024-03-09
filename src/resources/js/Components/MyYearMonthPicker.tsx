@@ -42,7 +42,7 @@ export default function MyDatePicker(props: Props) {
           }}
           sx={{
             '& fieldSet': { border: 'none' },
-            '& input': { fontSize: '1.3rem', color: '#57534f', cursor: 'pointer' },
+            '& input': { padding: 0, fontSize: '1.3rem', color: '#57534f', cursor: 'pointer' },
             '& input:focus': { '--tw-ring-color': 'transparent' },
             '& .MuiInputBase-root': { borderRadius: 0, color: '#57534f' }
           }}
