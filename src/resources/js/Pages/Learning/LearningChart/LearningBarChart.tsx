@@ -82,7 +82,12 @@ const generateData = (statisticsSet: StatisticsSet, offset: number) => {
   labels.reverse()
   categories.sort((a, b) => a.sort_order - b.sort_order)
 
-  const datasets: { label: string; data: number[]; backgroundColor: string }[] = []
+  const datasets: {
+    label: string
+    data: number[]
+    backgroundColor: string
+    barPercentage: number
+  }[] = []
 
   categories.forEach((category) => {
     const data = labels.map((ym) => {
@@ -93,7 +98,8 @@ const generateData = (statisticsSet: StatisticsSet, offset: number) => {
     datasets.push({
       label: category.name,
       data: data,
-      backgroundColor: category.color
+      backgroundColor: category.color,
+      barPercentage: 0.5
     })
   })
 
