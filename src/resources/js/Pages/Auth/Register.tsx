@@ -6,6 +6,7 @@ import PrimaryButton from '@/Components/PrimaryButton'
 import TextInput from '@/Components/TextInput'
 import { Head, Link, useForm } from '@inertiajs/react'
 import { LinearProgress } from '@mui/material'
+import { LoginHeader } from './components/LoginHeader'
 
 export default function Register() {
   const { data, setData, post, processing, errors, reset } = useForm({
@@ -30,6 +31,8 @@ export default function Register() {
   return (
     <GuestLayout>
       <Head title="Register" />
+
+      <LoginHeader className="mb-6" />
 
       {processing && (
         <LinearProgress variant="indeterminate" className="mb-4" style={{ height: 6 }} />
