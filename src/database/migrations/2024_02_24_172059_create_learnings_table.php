@@ -20,6 +20,7 @@ return new class extends Migration
             $table->integer("learning_time");
             $table->date("learning_at");
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

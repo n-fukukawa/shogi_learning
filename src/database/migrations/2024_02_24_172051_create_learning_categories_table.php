@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string("color", 15);
             $table->integer("sort_order");
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
