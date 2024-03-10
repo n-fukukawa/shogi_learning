@@ -52,6 +52,7 @@ export default function LearningListItem(props: Props) {
           <div
             className="flex items-center px-4 py-2 text-stone-700 hover:bg-stone-100 cursor-pointer"
             onClick={() => onClick(learning)}
+            key={learning.id}
           >
             <div
               className="w-3 h-3 my-1 mr-2 rounded-full"

@@ -21,7 +21,7 @@ export default function LearningEdit({ learning, categories, onClose }: Props) {
     learning_at: formatDate(learning.learning_at, '-', true),
     category_id: learning.category.id,
     learning_time: String(learning.learning_time),
-    title: learning.title
+    title: learning.title ?? ''
   })
 
   const form = useForm({})
