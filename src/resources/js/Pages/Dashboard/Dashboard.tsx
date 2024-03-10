@@ -39,7 +39,7 @@ export default function Dashboard(props: Props) {
       <div className="sm:py-4 py-2 px-4">
         <div className="max-w-2xl mx-auto sm:px-6 lg:px-8">
           <div className="flex items-center justify-between mt-4 px-2">
-            <MyYearMonthPicker defaultValue={`${year}-${month}-01`} onAccept={handleSubmit} />
+            <MyYearMonthPicker defaultValue={`${year}/${month}/01`} onAccept={handleSubmit} />
             <LearningCreateButton categories={categories} year={year} month={month} />
           </div>
 
