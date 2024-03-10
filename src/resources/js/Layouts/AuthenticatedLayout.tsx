@@ -5,15 +5,7 @@ import ResponsiveNavLink from '@/Components/ResponsiveNavLink'
 import { Link } from '@inertiajs/react'
 import { Flash, User } from '@/types'
 import { UserContext } from '@/Context/UserContext'
-import {
-  Alert,
-  Divider,
-  Slide,
-  SlideProps,
-  Snackbar,
-  ThemeProvider,
-  createTheme
-} from '@mui/material'
+import { Alert, Divider, Slide, SlideProps, Snackbar, ThemeProvider } from '@mui/material'
 import { theme } from './theme'
 
 export default function Authenticated({
