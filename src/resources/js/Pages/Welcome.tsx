@@ -15,9 +15,9 @@ export default function Welcome({
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <div className="shrink-0 flex items-center">
-            <Link href="/dashboard" className="flex items-center">
+            <Link href="/" className="flex items-center">
               <ApplicationLogo className="block h-9 w-auto  mr-2 fill-current text-gray-800" />
-              <span className="sm:block hidden">将棋学習記録</span>
+              <span className="sm:block hidden">将棋学習帳</span>
             </Link>
           </div>
           <div className="text-end">
