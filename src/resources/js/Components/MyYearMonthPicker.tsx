@@ -8,7 +8,7 @@ type Props = {
   defaultValue: string
   onAccept: (value: string | null) => void
 }
-export default function MyDatePicker(props: Props) {
+export default function MyYearMonthPicker(props: Props) {
   const { defaultValue, onAccept } = props
 
   const theme = createTheme({}, jaJP)
