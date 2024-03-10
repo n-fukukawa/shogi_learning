@@ -142,8 +142,8 @@ const getInitialDate = (defaultYear: number, defaultMonth: number) => {
   const date = today.getDate()
 
   if (year === defaultYear && month === defaultMonth) {
-    return formatDate(`${year}-${month}-${date}`, '-', true)
+    return formatDate(`${year}/${month}/${date}`, '/', true)
   } else {
-    return formatDate(`${defaultYear}-${defaultMonth}-1`, '-', true)
+    return formatDate(`${defaultYear}/${defaultMonth}/1`, '/', true)
   }
 }

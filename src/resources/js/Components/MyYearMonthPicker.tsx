@@ -26,7 +26,7 @@ export default function MyYearMonthPicker(props: Props) {
       >
         <MobileDatePicker
           views={['year', 'month']}
-          minDate={'2020-01-01'}
+          minDate={'2020/01/01'}
           maxDate={new Date().toLocaleDateString()}
           defaultValue={defaultValue}
           onAccept={onAccept}

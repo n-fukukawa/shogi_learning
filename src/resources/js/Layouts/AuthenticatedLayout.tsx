@@ -32,7 +32,7 @@ export default function Authenticated({
                   <div className="shrink-0 flex items-center">
                     <Link href="/dashboard" className="flex items-center">
                       <ApplicationLogo className="block h-9 w-auto  mr-2 fill-current text-gray-800" />
-                      将棋学習記録
+                      将棋学習帳
                     </Link>
                   </div>
                 </div>

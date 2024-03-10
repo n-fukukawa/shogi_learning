@@ -99,13 +99,13 @@ const centerText = (text: string) => ({
       const learningTime = chart.config.data.datasets[0].data[chart._active[0].index]
 
       ctx.fillStyle = chroma(color).darken(0.5).hex('rgb')
-      ctx.font = `normal ${width / 18}px San-serif`
+      ctx.font = `normal ${width / 18}px sans-serif`
       ctx.fillText(`${category}`, width / 2, top + height / 2 - height / 12)
 
-      ctx.font = `normal ${width / 12}px San-serif`
+      ctx.font = `normal ${width / 12}px sans-serif`
       ctx.fillText(`${learningTime}時間`, width / 2, top + height / 2 + height / 40)
     } else {
-      ctx.font = `normal ${width / 12}px San-serif`
+      ctx.font = `normal ${width / 12}px sans-serif`
       ctx.fillStyle = '#777'
       ctx.fillText(`${text}時間`, width / 2, top + height / 2)
     }

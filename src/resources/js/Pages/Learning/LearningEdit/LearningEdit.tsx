@@ -18,7 +18,7 @@ type Props = {
 export default function LearningEdit({ learning, categories, onClose }: Props) {
   const { data, setData, put, processing, errors } = useForm({
     user_id: learning.user_id,
-    learning_at: formatDate(learning.learning_at, '-', true),
+    learning_at: formatDate(learning.learning_at, '/', true),
     category_id: learning.category.id,
     learning_time: String(learning.learning_time),
     title: learning.title ?? ''
