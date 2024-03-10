@@ -58,7 +58,7 @@ export default function LearningListItem(props: Props) {
               style={{ background: chroma(learning.category.color).darken(0.3).hex('rgb') }}
             ></div>
             <div className="whitespace-nowrap">{learning.category.name}</div>
-            <div className="px-1 grow text-stone-500">{learning.title}</div>
+            <div className="px-1 pl-4 grow text-sm text-stone-500">{learning.title}</div>
             <div className="px-1 whitespace-nowrap text-right">{learning.learning_time}分</div>
           </div>
         ))}
