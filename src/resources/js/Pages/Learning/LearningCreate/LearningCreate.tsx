@@ -1,14 +1,14 @@
-import DateInput from '@/Components/DateInput'
+import { useForm } from '@inertiajs/react'
+import { Dialog, DialogActions, DialogContent } from '@mui/material'
+import { AccessTime, CalendarMonth, Edit, ImportContacts } from '@mui/icons-material'
+import { User } from '@/types'
+import { formatDate } from '@/utils/dateUtil'
+import { getProperForegroundColor } from '@/utils/colorHelper'
 import InputError from '@/Components/InputError'
-import InputLabel from '@/Components/InputLabel'
 import PrimaryButton from '@/Components/PrimaryButton'
 import SecondaryButton from '@/Components/SecondaryButton'
 import TextInput from '@/Components/TextInput'
-import { User } from '@/types'
-import { useForm } from '@inertiajs/react'
-import { Dialog, DialogActions, DialogContent } from '@mui/material'
-import { useEffect } from 'react'
-import { getProperForegroundColor } from '@/utils/colorHelper'
+import MyDatePicker from '@/Components/MyDatePicker'
 
 type Props = {
   user: User
@@ -26,27 +26,11 @@ export default function LearningCreate({
 }: Props) {
   const { data, setData, post, processing, errors } = useForm({
     user_id: user.id,
-    learning_at: '',
+    learning_at: getInitialDate(defaultYear, defaultMonth),
     category_id: categories[0].id,
     learning_time: '',
     title: ''
   })
-
-  useEffect(() => {
-    const today = new Date()
-    const year = today.getFullYear()
-    const month = today.getMonth() + 1
-    const date = today.getDate()
-
-    if (year === defaultYear && month === defaultMonth) {
-      setData({ ...data, learning_at: `${year}-${`0${month}`.slice(-2)}-${`0${date}`.slice(-2)}` })
-    } else {
-      setData({
-        ...data,
-        learning_at: `${defaultYear}-${`0${defaultMonth}`.slice(-2)}-01`
-      })
-    }
-  }, [defaultYear, defaultMonth])
 
   const handleLearningTime = (minutes: number) => {
     const learning_time = Math.max(0, Number(data.learning_time) + minutes)
@@ -66,42 +50,47 @@ export default function LearningCreate({
       PaperProps={{ style: { width: '100%', margin: 0 } }}
     >
       <DialogContent>
-        <InputLabel className="mb-1" value="学習日" />
-        <DateInput
-          className="w-48"
-          value={data.learning_at}
-          onChange={(e) => {
-            setData({ ...data, learning_at: e.target.value })
-          }}
-        />
+        <div className="mt-4 flex items-center justify-start">
+          <CalendarMonth color="secondary" fontSize="small" className="mr-4" />
+          <MyDatePicker
+            defaultValue={data.learning_at}
+            onAccept={(date) => setData({ ...data, learning_at: date ?? '' })}
+          />
+        </div>
         <InputError message={errors.learning_at} className="mt-2" />
 
-        <InputLabel value="内容" className="mt-6 mb-1" />
-        <div className="flex flex-wrap gap-1">
-          {categories.map((category) => (
-            <SecondaryButton
-              className="justify-center"
-              style={{
-                width: 'calc(33% - 0.2rem)',
-                borderColor: data.category_id === category.id ? category.color : undefined,
-                background: data.category_id === category.id ? category.color : undefined,
-                color:
-                  data.category_id === category.id
-                    ? getProperForegroundColor(category.color)
-                    : undefined
-              }}
-              size="small"
-              onClick={() => setData({ ...data, category_id: category.id })}
-              key={category.id}
-            >
-              {category.name}
-            </SecondaryButton>
-          ))}
+        <div className="mt-6 flex items-center justify-start">
+          <ImportContacts color="secondary" fontSize="small" className="mr-4" />
+
+          <div className="flex flex-wrap gap-1">
+            {categories.map((category) => (
+              <SecondaryButton
+                className={
+                  'justify-center ' +
+                  (category.name.length >= 4 ? 'text-xs sm:text-sm ' : undefined)
+                }
+                style={{
+                  width: 'calc(33% - 0.2rem)',
+                  borderColor: data.category_id === category.id ? category.color : undefined,
+                  background: data.category_id === category.id ? category.color : undefined,
+                  color:
+                    data.category_id === category.id
+                      ? getProperForegroundColor(category.color)
+                      : undefined
+                }}
+                size="small"
+                onClick={() => setData({ ...data, category_id: category.id })}
+                key={category.id}
+              >
+                {category.name}
+              </SecondaryButton>
+            ))}
+          </div>
         </div>
         <InputError message={errors.category_id} className="mt-2" />
 
-        <InputLabel value="学習時間" className="mt-6 mb-1" />
-        <div className="flex items-center justify-start">
+        <div className="mt-6 flex items-center justify-start">
+          <AccessTime color="secondary" fontSize="small" className="mr-4" />
           <TextInput
             className="w-16"
             type="text"
@@ -123,21 +112,20 @@ export default function LearningCreate({
         </div>
         <InputError message={errors.learning_time} className="mt-2" />
 
-        <InputLabel value="メモ" className="mt-6 mb-1" />
-        <TextInput
-          className="w-full"
-          value={data.title}
-          onChange={(e) => setData({ ...data, title: e.target.value })}
-        />
+        <div className="mt-6 flex items-center justify-start">
+          <Edit color="secondary" fontSize="small" className="mr-4" />
+          <TextInput
+            className="w-full"
+            value={data.title}
+            onChange={(e) => setData({ ...data, title: e.target.value })}
+          />
+        </div>
         <InputError message={errors.title} className="mt-2" />
 
         <InputError message={errors.user_id} className="mt-2" />
       </DialogContent>
       <DialogActions>
-        <div className="flex justify-between w-full px-4 py-2">
-          <SecondaryButton className="w-28" onClick={onClose} disabled={processing}>
-            閉じる
-          </SecondaryButton>
+        <div className="flex justify-end w-full px-4 pb-4">
           <PrimaryButton className="w-28" onClick={save} disabled={processing}>
             保存
           </PrimaryButton>
@@ -145,4 +133,17 @@ export default function LearningCreate({
       </DialogActions>
     </Dialog>
   )
+}
+
+const getInitialDate = (defaultYear: number, defaultMonth: number) => {
+  const today = new Date()
+  const year = today.getFullYear()
+  const month = today.getMonth() + 1
+  const date = today.getDate()
+
+  if (year === defaultYear && month === defaultMonth) {
+    return formatDate(`${year}-${month}-${date}`, '-', true)
+  } else {
+    return formatDate(`${defaultYear}-${defaultMonth}-1`, '-', true)
+  }
 }
