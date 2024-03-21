@@ -52,7 +52,9 @@ export default function LearningEdit({ learning, categories, onClose }: Props) {
           <CalendarMonth color="secondary" fontSize="small" className="mr-4" />
           <MyDatePicker
             defaultValue={data.learning_at}
-            onAccept={(date) => setData({ ...data, learning_at: date ?? '' })}
+            onAccept={(date) => {
+              setData({ ...data, learning_at: date ? new Date(date).toLocaleDateString() : '' })
+            }}
           />
         </div>
         <InputError message={errors.learning_at} className="mt-2" />
